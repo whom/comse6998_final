@@ -1,21 +1,22 @@
 import json, logging, threading
-from kafka import KafkaClient, SimpleProducer
+from kafka import KafkaProducer
+import time
 
 class TapFashionProducer(threading.Thread):
 	daemon = True
 
 	def __init__(self, zk_endpoint, topic):
 		self._topic = topic
-		self._kafka = KafkaClient(zk_endpoint)
-		self._producer = SimpleProducer(self._kafka)
+		self._producer = KafkaProducer(bootstrap_servers=zk_endpoint)
 		self._message = {}
 		self._counter = 0
 
 	def run(self):
-		if self._message:
-			self._producer.send_messages(self._topic, json.dumps(self._message))
-			self._counter += 1
-			self._message = {}
+		while True:
+			if self._message:
+				self._producer.send(self._topic, bytes(json.dumps(self._message)))
+				self._counter += 1
+				self._message = {}
 
 	def createPost(self, title, user_id, text, location=None, score=0, images=None, comments=None):
 		self._message['title'] = title
@@ -42,7 +43,7 @@ class TapFashionProducer(threading.Thread):
 
 def main():
 	producer_test = TapFashionProducer('localhost:9092', 'test_topic')
-	post = producer_test.createPost(title="HELLO WORLD!", user_id="12345", text="Yep.", location={'lat':45, 'lon':50})
+	producer_test.createPost(title="HELLO WORLD!", user_id="12345", text="Yep.", location={'lat':45, 'lon':50})
 	producer_test.run()
 
 if __name__ == "__main__":
