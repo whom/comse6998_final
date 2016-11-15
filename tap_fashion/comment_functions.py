@@ -2,6 +2,7 @@ import json, logging, threading, certifi
 # from kafka import KafkaConsumer
 import time
 from  elasticsearch import Elasticsearch
+# imported just for the example.
 from post_functions import Postmaster
 
 ES_ENDPOINT = ('https://search-fashion-exembdm6hi7dy6gxjhubkplo2i.us-west-2.es.amazonaws.com')
