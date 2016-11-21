@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<script>
+        function readCookie(name) {
+            name += '=';
+            for (var ca = document.cookie.split(/;\s*/), i = ca.length - 1; i >= 0; i--)
+                if (!ca[i].indexOf(name))
+                    return ca[i].replace(name, '');
+        }
+
+        function initialize() {
+            var testName = readCookie("username");
+            document.getElementById('Name').innerHTML =
+                    'Hello, ' + testName + '!';
+        }
+
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1330674406973222',
+                cookie: true,  // enable cookies to allow the server to access
+                               // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.8' // use graph api version 2.5
+            });
+
+
+            FB.getLoginStatus(function (response) {
+                if (response && response.status === 'connected') {
+
+                    FB.logout(function (response) {
+                        document.location.reload();
+                    });
+                } else if (response.status === 'not_authorized') {
+                    FB.logout(function (response) {
+                        document.location.reload();
+                    });
+                }
+            });
+
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+    </script>
+
+
+<body onload="initialize()">>
+
+<div id="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="sr-only"> Toggle navigation</span>
+                <span class="icon-bar"> </span>
+                <span class="icon-bar"> </span>
+                <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand" href="#">Tap Fashion</a>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right ">
+                    <label class="navbar-brand" id="Name">Hello</label>
+                    <li><a onclick="javascript : getLoginStatus()" class="navbar-brand" href="/webapp">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="navbar-text pull=left">
+        </div>
+    </div>
+</div>
+
+
+ </body>
+</html>
