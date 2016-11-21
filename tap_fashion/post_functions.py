@@ -3,6 +3,7 @@ from boto import sqs
 from boto.sqs.message import Message
 # from kafka import KafkaProducer
 from  elasticsearch import Elasticsearch
+from datetime import datetime
 
 ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
 
@@ -38,6 +39,7 @@ def createPost(title, user_id, text, user_name, location=None, score=0, images=N
 	post['location'] = {}
 	post['comments'] = []
 	post['images'] = []
+	post['published'] = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
 	if location:
 		post['location']['lat'] = location['lat']
