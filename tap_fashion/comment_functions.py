@@ -36,7 +36,7 @@ def storeComment(comment_message):
 
 ''' Creates and returns a dictionary object with comments.
 '''
-def createComment(post_id, user_id, text, location=None, score=0, images=None):
+def createComment(post_id, user_id, user_name, text, location=None, score=0, images=None):
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
@@ -44,6 +44,7 @@ def createComment(post_id, user_id, text, location=None, score=0, images=None):
 
 	comment = {}
 	comment['user_id'] = user_id
+	comment['user_name'] = user_name
 	comment['text'] = text
 	comment['score'] = score
 	comment['post_id'] = post_id

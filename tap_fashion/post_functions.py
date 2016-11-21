@@ -19,7 +19,7 @@ def storePost(post_message):
 	result = es.index(index='posts', doc_type='post', body=post_message)
 	return result['_id']
 
-def createPost(title, user_id, text, location=None, score=0, images=None, comments=None):
+def createPost(title, user_id, text, user_name, location=None, score=0, images=None, comments=None):
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
@@ -28,6 +28,7 @@ def createPost(title, user_id, text, location=None, score=0, images=None, commen
 	post = {}
 	post['title'] = title
 	post['user_id'] = user_id
+	post['user_name'] = user_name
 	post['text'] = text
 	post['score'] = score
 	post['location'] = {}
@@ -53,7 +54,7 @@ def findPost(post_id):
 		use_ssl=True,
 		verify_certs=True,
 		ca_certs=certifi.where(),)
-		
+
 	results = es.search(index="posts",
 		doc_type="post", 
 		body={"query":{ "terms": { "_id": [post_id]}}})
