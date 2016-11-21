@@ -58,6 +58,21 @@ def buildWholePost(post_id):
 
 	return post
 
+def getAllPosts():
+	es = Elasticsearch([ES_ENDPOINT],
+		use_ssl=True,
+		verify_certs=True,
+		ca_certs=certifi.where(),)
+
+	results = es.search(index=index,
+		doc_type=doc_type, 
+		body={"query" : {"match_all" : {}}})
+
+	if results['hits']['total'] > 0:
+		return results['hits']['hits']
+	else:
+		return None
+
 '''
 Note: We're grabbing comments one at a time. However, we can dump all the IDs
 into ElasticSearch as a list which will be quicker. But we can visit this
