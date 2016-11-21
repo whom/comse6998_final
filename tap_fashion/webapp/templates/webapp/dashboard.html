@@ -254,6 +254,12 @@
                         </div>           
                         <div class="col-md-8 col-sm-6">
                             <div class="product">
+                                <div class="row User-ID">
+                                    <span class="Post-User-ID" >BKarla</span>
+                                </div>
+
+                                <!-- /.text -->
+                          
                                 <div class="flip-container">  
                                     <div class="flipper">
                                         <div class="front">
@@ -271,16 +277,36 @@
                                 <a href="detail.html" class="invisible">
                                     <img style="margin: auto;" src="{% static 'webapp/img/product1.jpg' %}"  style="margin: auto;" alt="" class="img-responsive">
                                 </a>
-                                <div class="text">
-                                    <h3><a href="detail.html">Fur coat with very but very very long name</a></h3>
-                                    <p class="price">$143.00</p>
+                                <div class="row lower-card text">
+                                     <h3> <span class="post-desc">
+                                   Fur coat with very but very very long name. I've been planning to buy it for a long time but it is expensive. I don't know if it is worth it. 
+                                   </span>
+                                    </h3>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-8 lower-buttons">
                                     <p class="buttons">
-                                        <a href="detail.html" class="btn btn-default">View comments</a>
+                                        <a onclick="viewComments();" class="btn btn-default">View comments</a>
                                         <a href="basket.html" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i>Like</a>
                                     </p>
-
-                                 </div>
-                                <!-- /.text -->
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                                <div class="comments" id="comments1">
+                                    <div class="comment-container">
+                                        <div class="Comment-User-ID" >BKarla</div>
+                                        <div class="Comment-content" >Please suggest smmthng</div>
+                                    </div>
+                                    <div class="comment-container">
+                                        <div class="Comment-User-ID" >Friend</div>
+                                        <div class="Comment-content" >This looks awsm!!</div>
+                                    </div>
+                                    <div class="comment-container">
+                                        <div class="Comment-User-ID" >BKarla</div>
+                                        <div class="Comment-content" >OK sir</div>
+                                    </div>
+                                </div>
                                 
                                 
                             </div>
@@ -665,7 +691,7 @@
     <script style="margin: auto;" src="{% static 'webapp/js/bootstrap-hover-dropdown.js' %}"></script>
     <script style="margin: auto;" src="{% static 'webapp/js/owl.carousel.min.js' %}"></script>
     <script style="margin: auto;" src="{% static 'webapp/js/front.js' %}"></script>
-
+    <script style="margin: auto;" src="{% static 'webapp/js/custom.js' %}"></script>
 
 
 

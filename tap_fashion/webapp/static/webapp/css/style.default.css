@@ -564,6 +564,10 @@ h1 {
 #content .product .text h3 a {
   color: #555555;
 }
+h5{
+ color: #555555;
+ text-align: center; 
+}
 #content .product .text p.price {
   font-size: 18px;
   text-align: center;
