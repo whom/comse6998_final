@@ -58,7 +58,16 @@ class Postmaster(threading.Thread):
 		if results['hits']['total'] > 0:
 			return results['hits']['hits']
 
+	def addCommentToPost(self, post_id, comment_id):
+		results = self._producer.search(index="posts",
+			doc_type="post", 
+			body={"query":{ "terms": { "_id": ["{}".format(post_id)]}}})
 
+		if results['hits']['total'] > 0:
+			results['hits']['hits'][0]['_source']['comments'].append(comment_id)
+			result = self._producer.index(index='posts', doc_type='post', id=post_id, body=self._message)
+
+			return result['_id']
 
 def main():
 	producer_test = Postmaster(ES_ENDPOINT, 'test_topic')
@@ -67,7 +76,7 @@ def main():
 	post_id = producer_test.run()
 	print "Added: " + post_id
 
-	posts = producer_test._producer.search(index="posts", doc_type="post", body={"query":{ "match_all": {}}})
+	posts = producer_test._producer.search(index="posts", doc_type="post", body={"doc": {"query":{ "match_all": {}}}})
 
 	for post in posts['hits']['hits']:
 		print post['_source']
