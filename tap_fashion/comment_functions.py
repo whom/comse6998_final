@@ -10,15 +10,29 @@ ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.
 # Therefore, in order to add a comment, we must first have a post to add it to.
 # It's a little more complicated than posts.
 
+conf = {
+  'sqs-access-key': 'AKIAIP3UK2QLTBYKEWXQ',
+  'sqs-secret-key': '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',
+  'sqs-queue-name': 'comments-queue',
+  'sqs-region': 'us-west-2'
+}
+
 ''' Stores the comment in ElasticSearch, then updates the post with this comment ID.
 '''
 def storeComment(comment_message):
-	es = Elasticsearch([endpoint],
+	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
 		ca_certs=certifi.where(),)
 
-	result = es.index(index='comments',doc_type='comment', body=self._message)
+    sqs_client =  sqs.connect_to_region(conf.get('sqs-region'),
+      aws_access_key_id=conf.get('sqs-access-key'),
+      aws_secret_access_key =conf.get('sqs-secret-key'))
+
+    sqs_queue = sqs_client.get_queue(conf.get('sqs-queue-name'))
+    message = Message()
+    message.set_body(json.dumps(comment_message))
+    status = sqs_queue.write(message)
 
 	# update the post with this new comment
 	posts = es.search(index="posts", doc_type="post", 
@@ -28,7 +42,7 @@ def storeComment(comment_message):
 		for post in posts['hits']['hits']:
 			post['_source']['comments'].append(result['_id']) 
 
-			post_update = self._producer.update(index="posts",
+			post_update = es.update(index="posts",
 				doc_type="post", id=comment_message['post_id'],
 				body={"doc": {"comments": post['_source']['comments']}})
 
@@ -36,33 +50,42 @@ def storeComment(comment_message):
 
 ''' Creates and returns a dictionary object with comments.
 '''
-def createComment(post_id, user_id, text, location=None, score=0, images=None):
-	es = Elasticsearch([endpoint],
+def createComment(post_id, user_id, user_name, text, location=None, score=0, images=None):
+	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
 		ca_certs=certifi.where(),)
 
+	comment = {}
 	comment['user_id'] = user_id
+	comment['user_name'] = user_name
 	comment['text'] = text
-	comment['score'] = score
 	comment['post_id'] = post_id
-	comment['images'] = []
 	comment['location'] = {}
+
+
+	# not implemented or used
+	comment['score'] = score
+	comment['images'] = []
+	if images:
+		for image in images:
+			comment['images'].append({'url':image})
 
 	if location:
 		comment['location']['lat'] = location['lat']
 		comment['location']['lon'] = location['lon']
-
-	if images:
-		for image in images:
-			comment['images'].append({'url':image})
 
 	return comment
 
 ''' Retrieves a comment given a specific ID.
 '''
 def findComment(comment_id):
-	results = self._producer.search(index="comments",
+	es = Elasticsearch([ES_ENDPOINT],
+		use_ssl=True,
+		verify_certs=True,
+		ca_certs=certifi.where(),)
+
+	results = es.search(index="comments",
 		doc_type="comment", 
 		body={"query":{ "terms": { "_id": ["{}".format(comment_id)]}}})
 

@@ -1,9 +1,17 @@
 import json, certifi
+from boto import sqs
+from boto.sqs.message import Message
 # from kafka import KafkaProducer
-import time
 from  elasticsearch import Elasticsearch
 
 ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
+
+conf = {
+  'sqs-access-key': 'AKIAIP3UK2QLTBYKEWXQ',
+  'sqs-secret-key': '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',
+  'sqs-queue-name': 'posts-queue',
+  'sqs-region': 'us-west-2'
+}
 
 # POC on how to create posts.
 # When we want to create posts, we collect information on it, then send it to ElasticSearch.
@@ -11,23 +19,20 @@ ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.
 
 
 def storePost(post_message):
-	es = Elasticsearch([ES_ENDPOINT],
-		use_ssl=True,
-		verify_certs=True,
-		ca_certs=certifi.where(),)
+    sqs_client =  sqs.connect_to_region(conf.get('sqs-region'),
+      aws_access_key_id=conf.get('sqs-access-key'),
+      aws_secret_access_key =conf.get('sqs-secret-key'))
 
-	result = es.index(index='posts', doc_type='post', body=post_message)
-	return result['_id']
+    sqs_queue = sqs_client.get_queue(conf.get('sqs-queue-name'))
+    message = Message()
+    message.set_body(json.dumps(post_message))
+    status = sqs_queue.write(message)
 
-def createPost(title, user_id, text, location=None, score=0, images=None, comments=None):
-	es = Elasticsearch([ES_ENDPOINT],
-		use_ssl=True,
-		verify_certs=True,
-		ca_certs=certifi.where(),)
-
+def createPost(title, user_id, text, user_name, location=None, score=0, images=None, comments=None):
 	post = {}
 	post['title'] = title
 	post['user_id'] = user_id
+	post['user_name'] = user_name
 	post['text'] = text
 	post['score'] = score
 	post['location'] = {}
@@ -53,7 +58,7 @@ def findPost(post_id):
 		use_ssl=True,
 		verify_certs=True,
 		ca_certs=certifi.where(),)
-		
+
 	results = es.search(index="posts",
 		doc_type="post", 
 		body={"query":{ "terms": { "_id": [post_id]}}})
