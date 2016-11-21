@@ -5,7 +5,7 @@ from  elasticsearch import Elasticsearch
 
 ES_ENDPOINT = ('search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
 
-def getObject(id, index, doc_type):
+def getObject(the_id, index, doc_type):
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
@@ -13,7 +13,7 @@ def getObject(id, index, doc_type):
 
 	results = es.search(index=index,
 		doc_type=doc_type, 
-		body={"query":{ "terms": { "_id": [id]}}})
+		body={"query":{ "terms": { "_id": [the_id]}}})
 
 	if results['hits']['total'] == 1:
 		return results['hits']['hits'][0]['_source']

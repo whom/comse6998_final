@@ -1,4 +1,6 @@
 import json, certifi
+from boto import sqs
+from boto.sqs.message import Message
 # from kafka import KafkaConsumer
 import time
 from  elasticsearch import Elasticsearch
@@ -25,14 +27,12 @@ def storeComment(comment_message):
 		verify_certs=True,
 		ca_certs=certifi.where(),)
 
-    sqs_client =  sqs.connect_to_region(conf.get('sqs-region'),
-      aws_access_key_id=conf.get('sqs-access-key'),
-      aws_secret_access_key =conf.get('sqs-secret-key'))
+	sqs_client =  sqs.connect_to_region(conf.get('sqs-region'),
+    	aws_access_key_id=conf.get('sqs-access-key'),
+    	aws_secret_access_key =conf.get('sqs-secret-key'))
 
-    sqs_queue = sqs_client.get_queue(conf.get('sqs-queue-name'))
-    message = Message()
-    message.set_body(json.dumps(comment_message))
-    status = sqs_queue.write(message)
+	sqs_queue = sqs_client.get_queue(conf.get('sqs-queue-name'))
+	message = Message()
 
 	# update the post with this new comment
 	posts = es.search(index="posts", doc_type="post", 
@@ -40,13 +40,12 @@ def storeComment(comment_message):
 
 	if posts['hits']['total'] == 1:
 		for post in posts['hits']['hits']:
-			post['_source']['comments'].append(result['_id']) 
+			full_message = {}
+			full_message['post'] = post
+			full_message['comment'] = comment_message
 
-			post_update = es.update(index="posts",
-				doc_type="post", id=comment_message['post_id'],
-				body={"doc": {"comments": post['_source']['comments']}})
-
-	return result['_id']
+			message.set_body(json.dumps(full_message))
+			status = sqs_queue.write(message)
 
 ''' Creates and returns a dictionary object with comments.
 '''
