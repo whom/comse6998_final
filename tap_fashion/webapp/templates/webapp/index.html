@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Tap Fashion</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'webapp/indexStyle.css' %}"/>
+
 </head>
 <body>
+
+<div id="background">
+
+
+
+</div>
 <script>
 
     // This is called with the results from from FB.getLoginStatus().
@@ -108,16 +116,17 @@
   the FB.login() function when clicked.
 -->
 
-<div>
 
-    <h1 class="mainText">Tap Fashion</h1>
-    <div class="login">
+<div class="container text-center">
+    <form class="form-signin" id='login_form'>
+         <h2 class="text-center">Tap Fashion,  <small> let's go!</small></h2>
+        <div class="login">
         <fb:login-button class="btn btn-primary " scope="public_profile,email" class="facebook"
                          onlogin="checkLoginState();">
         </fb:login-button>
     </div>
-</div>
-
+    </form>
+        </div>
 
 <div id="status">
 </div>
