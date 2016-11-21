@@ -1,1 +1,40 @@
 /** Your theme modifications here **/
+.User-ID{
+	text-align: center;
+	padding: 20px;
+	font-size: 20px;	
+	
+}
+.Post-User-ID {
+	font-weight: bold;
+	color:#4fbfa8;
+	text-align: center;
+}
+.lower-buttons{
+	margin:auto;
+	margin-top: 20px;
+}
+.post-desc{
+
+	 color: #555555;
+}
+.Comment-User-ID{
+	color:#4fbfa8;
+	padding: 3px;
+}
+.comment-container{
+    padding: 5px;
+}
+.comments{
+	text-align: left;
+	padding: 10px;
+	background: #e6e6ff;
+	display: none;
+}
+
+.product{
+	 -webkit-box-shadow: 0 8px 12px -12px #222;
+  -moz-box-shadow: 0 8px 12px -12px #222;
+  box-shadow: 0 8px 12px -12px #222;
+  
+}
