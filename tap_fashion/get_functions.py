@@ -3,8 +3,7 @@ import json, logging, certifi
 import time
 from  elasticsearch import Elasticsearch
 
-ES_ENDPOINT = ('https://search-fashion-exembdm6hi7dy6gxjhubkplo2i.'
-	'us-west-2.es.amazonaws.com')
+ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
 
 def getObject(id, index, doc_type):
 	es = Elasticsearch([ES_ENDPOINT],

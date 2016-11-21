@@ -3,7 +3,7 @@ import json, certifi
 import time
 from  elasticsearch import Elasticsearch
 
-ES_ENDPOINT = ('https://search-fashion-exembdm6hi7dy6gxjhubkplo2i.us-west-2.es.amazonaws.com')
+ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
 
 # POC of storing and retrieving comments.
 # comments cannot be exist on their own. They must be part of a post.
@@ -87,3 +87,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
+'''
