@@ -13,12 +13,12 @@ ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.
 ''' Stores the comment in ElasticSearch, then updates the post with this comment ID.
 '''
 def storeComment(comment_message):
-	es = Elasticsearch([endpoint],
+	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
 		ca_certs=certifi.where(),)
 
-	result = es.index(index='comments',doc_type='comment', body=self._message)
+	result = es.index(index='comments',doc_type='comment', body=comment_message)
 
 	# update the post with this new comment
 	posts = es.search(index="posts", doc_type="post", 
@@ -28,7 +28,7 @@ def storeComment(comment_message):
 		for post in posts['hits']['hits']:
 			post['_source']['comments'].append(result['_id']) 
 
-			post_update = self._producer.update(index="posts",
+			post_update = es.update(index="posts",
 				doc_type="post", id=comment_message['post_id'],
 				body={"doc": {"comments": post['_source']['comments']}})
 
@@ -37,11 +37,12 @@ def storeComment(comment_message):
 ''' Creates and returns a dictionary object with comments.
 '''
 def createComment(post_id, user_id, text, location=None, score=0, images=None):
-	es = Elasticsearch([endpoint],
+	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
 		ca_certs=certifi.where(),)
 
+	comment = {}
 	comment['user_id'] = user_id
 	comment['text'] = text
 	comment['score'] = score
@@ -62,7 +63,12 @@ def createComment(post_id, user_id, text, location=None, score=0, images=None):
 ''' Retrieves a comment given a specific ID.
 '''
 def findComment(comment_id):
-	results = self._producer.search(index="comments",
+	es = Elasticsearch([ES_ENDPOINT],
+		use_ssl=True,
+		verify_certs=True,
+		ca_certs=certifi.where(),)
+
+	results = es.search(index="comments",
 		doc_type="comment", 
 		body={"query":{ "terms": { "_id": ["{}".format(comment_id)]}}})
 
