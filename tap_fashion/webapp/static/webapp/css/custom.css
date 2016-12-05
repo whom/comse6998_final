@@ -14,9 +14,13 @@
 	margin:auto;
 	margin-top: 20px;
 }
-.post-desc{
-
+.post-desc {
 	 color: #555555;
+}
+
+.post-title{
+	color: #555555;
+	text-align: center;
 }
 .Comment-User-ID{
 	color:#4fbfa8;
@@ -37,4 +41,11 @@
   -moz-box-shadow: 0 8px 12px -12px #222;
   box-shadow: 0 8px 12px -12px #222;
   
+}
+.input-group-addon {
+	background-color:   #e6e6ff;
+}
+
+.post-comment-button {
+	background-color:   #e6e6ff;
 }

@@ -52,7 +52,7 @@
         function initialize() {
             var testName = readCookie("username");
             document.getElementById('Name').innerHTML =
-                    '<a>Hello, ' + testName + '!'+'</a>';
+                    '<a>Hello, <span id="userName">' + testName + '</span>!'+'</a>';
         }
 
 
@@ -257,6 +257,13 @@
                                 <div class="row User-ID">
                                     <span class="Post-User-ID" >BKarla</span>
                                 </div>
+                                <div class="text">
+                                    <h3> 
+                                    <span class="post-title">
+                                       Fur coat with very but very very long Name. 
+                                   </span>
+                                    </h3>
+                                </div>
 
                                 <!-- /.text -->
                           
@@ -294,23 +301,31 @@
                                     </div>
                                 </div>
                                 <div class="comments" id="comments1">
-                                    <div class="comment-container">
-                                        <div class="Comment-User-ID" >BKarla</div>
-                                        <div class="Comment-content" >Please suggest smmthng</div>
-                                    </div>
-                                    <div class="comment-container">
-                                        <div class="Comment-User-ID" >Friend</div>
-                                        <div class="Comment-content" >This looks awsm!!</div>
-                                    </div>
-                                    <div class="comment-container">
-                                        <div class="Comment-User-ID" >BKarla</div>
-                                        <div class="Comment-content" >OK sir</div>
-                                    </div>
+                                    <div id="comment-outer-container">
+                                        <div class="comment-container">
+                                    
+                                            <div class="Comment-User-ID" >BKarla</div>
+                                            <div class="Comment-content" >Please suggest smmthng</div>
+                                        </div>
+                                        <div class="comment-container">
+                                            <div class="Comment-User-ID" >Friend</div>
+                                            <div class="Comment-content" >This looks awsm!!</div>
+                                        </div>
+                                        <div class="comment-container">
+                                            <div class="Comment-User-ID" >BKarla</div>
+                                            <div class="Comment-content" >OK sir</div>
+                                        </div>
+                                        </div>
+                                        <div class="comment-container">
+                                    
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Type a comment..." id="comment-textbox" aria-describedby="input-comment">
+                                            <span class="input-group-addon" id="input-comment"><button onclick="postComment();" class="post-comment-button">POST</button></span>
+                                        </div>
+                                    
+                                        </div>
                                 </div>
-                                
-                                
-                            </div>
-                            <!-- /.product -->
+                                <!-- /.product -->
                         </div>
 
                         <div class="col-md-2 col-sm-2"> 
