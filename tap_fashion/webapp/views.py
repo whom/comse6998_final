@@ -22,3 +22,9 @@ class DashboardView(generic.ListView):
 
     def get_queryset(self):
         return True
+
+class NewPostView(generic.ListView):
+    template_name = 'webapp/post.html'
+
+    def get_queryset(self):
+        return True
