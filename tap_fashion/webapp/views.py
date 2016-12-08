@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
 
+import json
 
 class IndexView(generic.ListView):
     """
@@ -28,3 +29,11 @@ class NewPostView(generic.ListView):
 
     def get_queryset(self):
         return True
+
+def storePost(request):
+    print "YEP"
+
+    test = {}
+    test['return'] = request.GET['title']
+    
+    return HttpResponse(json.dumps(test))
