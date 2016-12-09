@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^dashboard/$', views.DashboardView.as_view(), name='dashboard'),
     url(r'^post/$', views.NewPostView.as_view(), name='post'),
     url(r'^post/newPost/', views.storePost, name='newPost'),
+    url(r'^dashboard/storeComment/', views.storeComment, name='newComment'),
 ]

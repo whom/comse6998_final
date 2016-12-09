@@ -37,3 +37,11 @@ def storePost(request):
     test['return'] = request.GET['title']
     
     return HttpResponse(json.dumps(test))
+
+def storeComment(request):
+    print "YEP"
+
+    test = {}
+    test['return'] = "Success! This is what was sent: " + request.GET['comment']
+
+    return HttpResponse(json.dumps(test))
