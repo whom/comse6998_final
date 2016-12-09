@@ -30,6 +30,10 @@ class NewPostView(generic.ListView):
     def get_queryset(self):
         return True
 
+'''
+Currently just stubs. We'd need to call the helper Python functions in
+post_functions.py to store them into the queue.
+'''
 def storePost(request):
     print "YEP"
 
