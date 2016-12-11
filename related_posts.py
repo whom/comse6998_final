@@ -1,3 +1,23 @@
+''' HOW DOES THIS WORK??
+
+1. Retrieve all posts from ElasticSearch. Combine the text and title, then
+sanitize the information by removing punctuation, stop words, and http links.
+2. Using gensim, build a corpus using the remaining text.
+3. Transform the corpus into a TF-IDF model and index it.
+4. With the model complete, now we go through every single post and evaluate
+similarity scores.
+4a. Sanitize the post, then transform it into a sparse matrix.
+4b. Run it against our model.
+4c. Save the top 10 similarities for the post into EVALUATED_POSTS.
+5. Profit?!
+
+Results are stored in dictionary format:
+key = post ID
+value = Sorted list of 10 most related post IDs, along with their similarity
+scores. It is in this form:
+[(post ID, similarity score), ...]
+'''
+
 from elasticsearch import Elasticsearch
 import certifi, json, string, logging, re, string
 from pprint import pprint
@@ -73,7 +93,8 @@ def main():
     sims = index[tfidf[vec]]
     p = list(enumerate(sims))
     top_ten = sorted(p, key=lambda x: x[1], reverse=True)[1:11]
-    dic = sorted([(keys[x[0]], x[1]) for x in top_ten], key=lambda x: x[1], reverse=True)
+    dic = sorted([(keys[x[0]], x[1]) for x in top_ten], key=lambda x: x[1],
+        reverse=True)
     EVALUATED_POSTS[key] = dic
 
   # store in elasticsearch, maybe?
