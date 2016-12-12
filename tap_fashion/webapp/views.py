@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
 
 import json
 
@@ -49,3 +50,10 @@ def storeComment(request):
     test['return'] = "Success! This is what was sent: " + request.GET['comment']
 
     return HttpResponse(json.dumps(test))
+
+@csrf_exempt
+def user_login(request):
+    if request.method == 'POST':
+        user_id = request.POST['userID']
+        user_name = request.POST['userName']
+    return HttpResponse

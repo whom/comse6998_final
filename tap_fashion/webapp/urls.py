@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^post/$', views.NewPostView.as_view(), name='post'),
     url(r'^post/newPost/', views.storePost, name='newPost'),
     url(r'^dashboard/storeComment/', views.storeComment, name='newComment'),
+    url(r'^user/login/$', views.user_login, name='user_login'),
 ]

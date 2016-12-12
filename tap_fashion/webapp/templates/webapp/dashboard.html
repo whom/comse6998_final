@@ -36,61 +36,12 @@
     <script style="margin: auto;" src="{% static 'webapp/js/respond.min.js' %}"></script>
 
     <link rel="shortcut icon" href="favicon.png">
-
+    <script type="text/javascript" src="{% static 'webapp/js/LoginScript.js' %}"></script>
 
 
 </head>
 
 <script>
-        function readCookie(name) {
-            name += '=';
-            for (var ca = document.cookie.split(/;\s*/), i = ca.length - 1; i >= 0; i--)
-                if (!ca[i].indexOf(name))
-                    return ca[i].replace(name, '');
-        }
-
-        function initialize() {
-            var testName = readCookie("username");
-            document.getElementById('Name').innerHTML =
-                    '<a>Hello, <span id="userName">' + testName + '</span>!'+'</a>';
-        }
-
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '1330674406973222',
-                cookie: true,  // enable cookies to allow the server to access
-                               // the session
-                xfbml: true,  // parse social plugins on this page
-                version: 'v2.8' // use graph api version 2.5
-            });
-
-
-            FB.getLoginStatus(function (response) {
-                if (response && response.status === 'connected') {
-
-                    FB.logout(function (response) {
-                        document.location.reload();
-                    });
-                } else if (response.status === 'not_authorized') {
-                    FB.logout(function (response) {
-                        document.location.reload();
-                    });
-                }
-            });
-
-        };
-
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
         function addComment() {
             var commentContent=document.getElementById("comment-textbox").value;
             var testName=document.getElementById('userName').innerHTML;
@@ -120,7 +71,7 @@
 
 
 
-<body onload="initialize()">>
+<body style="display:none">
     <!-- *** TOPBAR ***
  _________________________________________________________ -->
     <div id="top">
@@ -129,7 +80,7 @@
             </div>
             <div class="col-md-5" data-animate="fadeInDown">
                 <ul class="menu">
-                    <li><a onclick="javascript : getLoginStatus()" href="/webapp">Logout</a></li>
+                    <li><a onclick="facebooklogout();" href="/webapp">Logout</a></li>
                     <li id="Name" ><a>Hello</a></li>
                 </ul>
             </div>

@@ -13,7 +13,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("TFBackground.jpg");
+    background-image: url("../TFBackground.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100%;
