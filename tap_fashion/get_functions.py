@@ -3,7 +3,7 @@ import json, logging, certifi
 import time
 from  elasticsearch import Elasticsearch
 
-ES_ENDPOINT = ('search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
+ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
 
 def getObject(the_id, index, doc_type):
 	es = Elasticsearch([ES_ENDPOINT],
@@ -16,7 +16,11 @@ def getObject(the_id, index, doc_type):
 		body={"query":{ "terms": { "_id": [the_id]}}})
 
 	if results['hits']['total'] == 1:
-		return results['hits']['hits'][0]['_source']
+		result = results['hits']['hits'][0]['_source']
+		object_id = results['hits']['hits'][0]['_id']
+		result['post_id'] = object_id
+
+		return result
 	else:
 		return None
 
@@ -63,8 +67,8 @@ def getAllPosts():
 		verify_certs=True,
 		ca_certs=certifi.where(),)
 
-	results = es.search(index=index,
-		doc_type=doc_type, 
+	results = es.search(index='posts',
+		doc_type='post', 
 		body={"query" : {"match_all" : {}}})
 
 	if results['hits']['total'] > 0:

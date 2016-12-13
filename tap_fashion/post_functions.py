@@ -66,7 +66,12 @@ def findPost(post_id):
 		body={"query":{ "terms": { "_id": [post_id]}}})
 
 	if results['hits']['total'] > 0:
-		return results['hits']['hits']
+		result = results['hits']['hits'][0]['_source']
+		object_id = results['hits']['hits'][0]['_id']
+		result['post_id'] = object_id
+		return result
+	else:
+		return None
 
 '''
 def main():
