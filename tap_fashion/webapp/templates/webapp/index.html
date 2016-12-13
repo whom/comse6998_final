@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
 {% load static %}
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Tap Fashion</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'webapp/indexStyle.css' %}"/>
-
+    <link rel="stylesheet" type="text/css" href="{% static 'webapp/css/indexStyle.css' %}"/>
+    <title>Tap Fashion</title>
+    <script type="text/javascript" src="{% static 'webapp/js/LoginScript.js' %}"></script>
 </head>
-<body>
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
 
-<div id="background">
-
-
-
-</div>
+<body class="login" style="display: none">
 <script>
-
     // This is called with the results from from FB.getLoginStatus().
     function statusChangeCallback(response) {
         // The response object is returned with a status field that lets the
@@ -24,17 +24,15 @@
         // Full docs on the response object can be found in the documentation
         // for FB.getLoginStatus().
         if (response.status === 'connected') {
-            testAPI();
             // Logged into your app and Facebook.
+            testAPI();
         } else if (response.status === 'not_authorized') {
-             window.location.href = "/webapp/index";
-
+            $('body').css('display', 'block');
             // The person is logged into Facebook, but not your app.
-
         } else {
+            $('body').css('display', 'block');
             // The person is not logged into Facebook, so we're not sure if
             // they are logged into this app or not.
-
         }
     }
 
@@ -55,7 +53,6 @@
             xfbml: true,  // parse social plugins on this page
             version: 'v2.8' // use graph api version 2.5
         });
-
 
         // Now that we've initialized the JavaScript SDK, we call
         // FB.getLoginStatus().  This function gets the state of the
@@ -85,15 +82,10 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-
     // Here we run a very simple test of the Graph API after login is
     // successful.  See statusChangeCallback() for when this call is made.
     function testAPI() {
-
         FB.api('/me', function (response) {
-            console.log(response);
-
-
             $.ajax({
                 type: 'POST',
                 url: 'user/login/',
@@ -103,10 +95,9 @@
                 }
             });
             document.cookie = "username=" + response.name + ";";
+            document.cookie = "userid=" + response.id + ";";
             window.location.href = "/webapp/dashboard";
         });
-
-
     }
 </script>
 
@@ -115,20 +106,9 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-
-
-<div class="container text-center">
-    <form class="form-signin" id='login_form'>
-         <h2 class="text-center">Tap Fashion,  <small> let's go!</small></h2>
-        <div class="login">
-        <fb:login-button class="btn btn-primary " scope="public_profile,email" class="facebook"
-                         onlogin="checkLoginState();">
-        </fb:login-button>
-    </div>
-    </form>
-        </div>
-
-<div id="status">
+<div style="float: right; margin-right: 10%">
+    <h1 class="mainText">Tap Fashion</h1>
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 </div>
 
 </body>
