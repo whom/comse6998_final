@@ -15,7 +15,7 @@ Results are stored in dictionary format:
 key = post ID
 value = Sorted list of 10 most related post IDs, along with their similarity
 scores. It is in this form:
-[(post ID, similarity score), ...]
+[[post ID, similarity score], ...]
 '''
 import certifi, json, string, logging, re, string
 from pyspark import SparkConf, SparkContext
@@ -28,6 +28,9 @@ ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2'
 EVALUATED_POSTS = {}
 APP_NAME = "Related Posts"
 MASTER = "local[*]"
+CORPUS_PATH = "/tmp/corpus.mm"
+DICTIONARY_PATH = "/tmp/dictionary.dict"
+es = None
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',
     level=logging.INFO)
@@ -35,8 +38,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',
 # grab all posts
 def grabPosts():
   results = []
-  es = Elasticsearch([ENDPOINT], use_ssl=True, verify_certs=True,
-      ca_certs=certifi.where(),)
+
   res = es.search(index="posts", doc_type="post", search_type='scan',
       scroll='2m', size=10, body={"query": {"match_all": {}}})
   sid = res['_scroll_id']
@@ -83,9 +85,12 @@ def main():
   # sanitize and build our corpus
   sentences = documents_rdd.map(lambda x: sanitize_sentence(x))
   dictionary = corpora.Dictionary(sentences.collect())
+  dictionary.save(DICTIONARY_PATH)
   corpus = sentences.map(lambda x: dictionary.doc2bow(x)).collect()
+  corpora.MmCorpus.serialize(CORPUS_PATH, corpus)
 
   # find out how many features we have and train the model.
+  # save the corpus as well for later use.
   last_corpus = corpus[len(corpus) - 1]
   num_features = last_corpus[len(last_corpus) - 1][0] + 1
   tfidf = models.TfidfModel(corpus)
@@ -93,18 +98,24 @@ def main():
       num_features=num_features)
 
   # now that the corpus is settled, go through each post and compute similarity.
+  # then store the results in elastic search.
   for key, value in posts_combined.iteritems():
+    storage = {}
     vec = dictionary.doc2bow(sanitize_sentence(value))
     sims = index[tfidf[vec]]
     p = list(enumerate(sims))
     top_ten = sorted(p, key=lambda x: x[1], reverse=True)[1:11]
-    dic = sorted([(keys[x[0]], x[1]) for x in top_ten], key=lambda x: x[1],
-        reverse=True)
+    top_ten = [list(x) for x in top_ten]
+    dic = [{'post_id':keys[x[0]], 'score':float(x[1])} for x in top_ten]
     EVALUATED_POSTS[key] = dic
 
-  # store in elasticsearch, maybe?
+    storage['id'] = key
+    storage['related_posts'] = dic
+    es.index(index='related_posts', doc_type='post', id=key, body=storage)
+
+    return EVALUATED_POSTS
 
 if __name__ == "__main__":
+  es = Elasticsearch([ENDPOINT], use_ssl=True, verify_certs=True,
+    ca_certs=certifi.where(),)
   main()
-
-  print EVALUATED_POSTS

@@ -18,6 +18,20 @@ conf = {
 # When we want to create posts, we collect information on it, then send it to ElasticSearch.
 # ElasticSearch automatically assigns an ID to it (unique, hash).
 
+def findRelatedPosts(post_id):
+	es = Elasticsearch([ES_ENDPOINT],
+		use_ssl=True,
+		verify_certs=True,
+		ca_certs=certifi.where(),)
+
+	results = es.search(index="related_posts",
+		doc_type="post", 
+		body={"query":{ "terms": { "_id": [post_id]}}})
+
+	if results['hits']['total'] > 0:
+		return results['hits']['hits'][0]['_source']
+	else:
+		return None
 
 def storePost(post_message):
     sqs_client =  sqs.connect_to_region(conf.get('sqs-region'),
