@@ -1,11 +1,14 @@
-import json, certifi
+import json, certifi, string
 from boto import sqs
 from boto.sqs.message import Message
 # from kafka import KafkaProducer
 from  elasticsearch import Elasticsearch
 from datetime import datetime
+from gensim import corpora, models, similarities
 
 ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
+CORPUS_PATH = "/tmp/corpus.mm"
+DICTIONARY_PATH = "/tmp/dictionary.dict"
 
 conf = {
   'sqs-access-key': 'AKIAIP3UK2QLTBYKEWXQ',
@@ -14,10 +17,62 @@ conf = {
   'sqs-region': 'us-west-2'
 }
 
-# POC on how to create posts.
-# When we want to create posts, we collect information on it, then send it to ElasticSearch.
-# ElasticSearch automatically assigns an ID to it (unique, hash).
+def is_number(s):
+  try:
+    float(s)
+    return True
+  except ValueError:
+    return False
 
+def sanitize_sentence(x):
+  stoplist = set('for a of the and to in'.split())
+  s = x.lower().split()
+  s = [w.translate(None, string.punctuation) for w in s]
+  s = [w for w in s if w not in stoplist]
+  s = [w for w in s if 'http' not in w and not is_number(w)]
+  return s
+
+'''
+In instances where a related post isn't found, then calculate it.
+Then store it.
+Returns a list of dictionaries where there are two keys:
+post_id: post ID that the post is related to
+score: the score our system gave it.
+
+DOESN'T WORK. The module returns the document index, not the ID...
+Will need a complete rework in order to calculate in realtime...
+'''
+def calculateRelatedPosts(post_id):
+	es = Elasticsearch([ES_ENDPOINT],
+		use_ssl=True,
+		verify_certs=True,
+		ca_certs=certifi.where(),)
+
+	storage = {}
+	post = findPost(post_id)
+	dictionary = corpora.Dictionary.load('/tmp/dictionary.dict')
+	corpus = corpora.MmCorpus('/tmp/corpus.mm')
+	last_corpus = corpus[len(corpus) - 1]
+	num_features = last_corpus[len(last_corpus) - 1][0] + 1
+	tfidf = models.TfidfModel(corpus)
+	index = similarities.SparseMatrixSimilarity(tfidf[corpus],
+  		num_features=num_features)
+
+	full_text = '{0} {1}'.format(post['title'], post['text'])
+	vec = dictionary.doc2bow(sanitize_sentence(full_text))
+	sims = index[tfidf[vec]]
+	p = list(enumerate(sims))
+	top_ten = sorted(p, key=lambda x: x[1], reverse=True)[1:11]
+	top_ten = [list(x) for x in top_ten]
+	dic = [{'post_id':x[0], 'score':float(x[1])} for x in top_ten]
+	storage['id'] = post_id
+	storage['related_posts'] = dic
+#	es.index(index='related_posts', doc_type='post', id=post_id, body=storage)
+	return dic
+
+'''
+For a given post, find the set of 10 related posts. If none exist, then calculate it.
+'''
 def findRelatedPosts(post_id):
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
