@@ -96,7 +96,7 @@
             });
             document.cookie = "username=" + response.name + ";";
             document.cookie = "userid=" + response.id + ";";
-            window.location.href = "/webapp/dashboard";
+            window.location.href = "/webapp/dashboard?username=" + response.name;
         });
     }
 </script>
