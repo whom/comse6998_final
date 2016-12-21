@@ -67,7 +67,7 @@ def getAllPosts():
 	es = Elasticsearch([ES_ENDPOINT], use_ssl=True, verify_certs=True,
 		ca_certs=certifi.where(),)
 	res = es.search(index="posts", doc_type="post", search_type='scan',
-		scroll='2m', size=10, body={"query": {"match_all": {}}})
+		scroll='2m', size=10, body={"sort" : [{ "published" : {"order" : "asc"}},"score"],"query": {"match_all": {}}})
 	sid = res['_scroll_id']
 	scroll_size = res['hits']['total']
 
