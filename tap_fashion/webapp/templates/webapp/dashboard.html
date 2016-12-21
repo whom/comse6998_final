@@ -43,26 +43,28 @@
 
 <script>
         function addComment() {
-            var commentContent=document.getElementById("comment-textbox").value;
-            
+            var commentContent = document.getElementById("comment-textbox").value;
+            var post_id = document.getElementById("post1").getAttribute("postid");
+            alert(post_id)
+
+
             alert(commentContent);
             alert(testName);
--
+
             jQuery.ajax({
                 url: 'storeComment',
                 type: 'GET',
                 datatype: 'text',
-                data: {comment: commentContent, username: testName},
+                data: {comment: commentContent, username: testName, userid: userid , post_id: post_id},
                 success: function(ret) {
-                    data = JSON.parse(ret);
-                    alert(data['return']);
-                    postComment(commentContent, testName);
+                    alert(ret);
                 },
                 failure: function(ret) { 
                     alert("ERROR");
                 }
             });
-            
+
+            postComment(commentContent, testName);
         }
 
         function goToCreatePost(){
@@ -233,7 +235,7 @@
                         <div class="col-md-2 col-sm-2"> 
                         </div>           
                         <div class="col-md-8 col-sm-6">
-                            <div class="product">
+                            <div class="product" id="post1" postid="3878">
                                 <div class="row User-ID">
                                     <span class="Post-User-ID" >BKarla</span>
                                 </div>
@@ -300,7 +302,7 @@
                                         <div class="comment-container">
                                     
                                         <div class="input-group">
-                                            <input type="text" id="comment-textbox" class="form-control" placeholder="Type a comment..."  aria-describedby="input-comment">
+                                            <input type="text" class="form-control" placeholder="Type a comment..." id="comment-textbox" aria-describedby="input-comment">
                                             <span class="input-group-addon" id="input-comment"><button onclick="addComment()" class="post-comment-button">POST</button></span>
                                         </div>
                                     
