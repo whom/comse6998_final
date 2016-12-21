@@ -6,7 +6,7 @@ function readCookie(name) {
         }
     }
 }
-var testName
+var testName = "";
 function initialize() {
     testName = readCookie("username");
     document.getElementById('Name').innerHTML = 'Hello, ' + testName + '!';
