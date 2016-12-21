@@ -79,7 +79,7 @@ def storeComment(request):
     user_id = request.GET['userid']
     user_name = request.GET['username']
     post_id = request.GET['post_id']
-    text = request.GET['text']
+    text = request.GET['comment']
 
     newComment = comment_functions.createComment(post_id, user_id, user_name, text)
     comment_functions.storeComment(newComment)
