@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
+import post_functions
+import comment_functions
 
 import json
 
@@ -36,18 +38,28 @@ Currently just stubs. We'd need to call the helper Python functions in
 post_functions.py to store them into the queue.
 '''
 def storePost(request):
-    print "YEP"
+    title = request.GET['title']
+    text = request.GET['text']
+    user_name = request.GET['username']
+    user_id = request.GET['userid']
+    image_url = request.GET['image']
 
-    test = {}
-    test['return'] = request.GET['title']
+    newPost = post_functions.createPost(title, user_id, text, user_name, images=[image_url])
+    post_functions.storePost(newPost)
     
-    return HttpResponse(json.dumps(test))
+    return HttpResponse("success")
 
 def storeComment(request):
-    print "YEP"
+    user_id = request.GET['userid']
+    user_name = request.GET['username']
+    post_id = request.GET['post_id']
+    text = request.GET['text']
+
+    newComment = comment_functions.createComment(post_id, user_id, user_name, text)
+    comment_functions.storeComment(newComment)
 
     test = {}
-    test['return'] = "Success! This is what was sent: " + request.GET['comment']
+    test['return'] = 'success'
 
     return HttpResponse(json.dumps(test))
 

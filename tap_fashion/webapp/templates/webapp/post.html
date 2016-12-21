@@ -95,6 +95,7 @@
         function createNewPost() {
         	var title = document.getElementById('title').value;
         	var text = document.getElementById('text').value;
+            var image = document.getElementById('image').value;
         	var user_id = 1234;
         	var user_name = "William";
 
@@ -102,7 +103,7 @@
 				url: 'newPost',
 				type: 'GET',
 				datatype: 'text',
-				data: {title: title, text: text, userid: user_id, username: user_name},
+				data: {title: title, text: text, userid: user_id, username: user_name, image: image},
 				success: function(ret) {
 					data = JSON.parse(ret);
 					alert(data['return']);
@@ -256,7 +257,7 @@
 						</p>
                         <form>
                         	<p>
-                                <textarea id="text" name="message" rows="1" cols="50">Image URL
+                                <textarea id="text" name="image" rows="1" cols="50">Image URL
                                 </textarea>
                             </p>
 						</form>
