@@ -52,71 +52,12 @@
 
         function initialize() {
             var testName = readCookie("username");
+
             document.getElementById('Name').innerHTML =
                     '<a>Hello, <span id="userName">' + testName + '</span>!'+'</a>';
+
         }
-
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '1330674406973222',
-                cookie: true,  // enable cookies to allow the server to access
-                               // the session
-                xfbml: true,  // parse social plugins on this page
-                version: 'v2.8' // use graph api version 2.5
-            });
-
-
-            FB.getLoginStatus(function (response) {
-                if (response && response.status === 'connected') {
-
-                    FB.logout(function (response) {
-                        document.location.reload();
-                    });
-                } else if (response.status === 'not_authorized') {
-                    FB.logout(function (response) {
-                        document.location.reload();
-                    });
-                }
-            });
-
-        };
-
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        function createNewPost() {
-        	var title = document.getElementById('title').value;
-        	var text = document.getElementById('text').value;
-            var image = document.getElementById('image').value;
-            // static user ID and username...need to retrieve them.
-        	var user_id = 1234;
-        	var user_name = "William";
-
-          	jQuery.ajax({
-				url: 'newPost',
-				type: 'GET',
-				datatype: 'text',
-				data: {title: title, text: text, userid: user_id, username: user_name, image: image},
-				success: function(ret) {
-                    console.log(ret)
-              	},
-              	failure: function(ret) { 
-              		alert("ERROR");
-              	}
-          	});
-    	}
     </script>
-
-
-
 
 <body onload="initialize()">>
     <!-- *** TOPBAR ***

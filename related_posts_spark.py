@@ -99,6 +99,7 @@ def main():
 
   # now that the corpus is settled, go through each post and compute similarity.
   # then store the results in elastic search.
+
   for key, value in posts_combined.iteritems():
     storage = {}
     vec = dictionary.doc2bow(sanitize_sentence(value))
@@ -113,7 +114,7 @@ def main():
     storage['related_posts'] = dic
     es.index(index='related_posts', doc_type='post', id=key, body=storage)
 
-    return EVALUATED_POSTS
+  return EVALUATED_POSTS
 
 if __name__ == "__main__":
   es = Elasticsearch([ENDPOINT], use_ssl=True, verify_certs=True,

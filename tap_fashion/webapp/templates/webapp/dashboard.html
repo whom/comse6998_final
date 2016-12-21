@@ -42,6 +42,12 @@
 </head>
 
 <script>
+        function storePostId() {
+            // needs to be dynamically gotten
+            var postId = 'AVjMtxIvCBwe55JHWosr';
+            window.location.href = "/webapp/related/?postId=" + postId;
+        }
+
         function addComment() {
             var commentContent=document.getElementById("comment-textbox").value;
             
@@ -275,7 +281,7 @@
                                     <p class="buttons">
                                         <a onclick="viewComments();" class="btn btn-default">View comments</a>
                                         <a href="basket.html" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i>Like</a>
-                                        <a href="related.html" class="btn btn-primary"></i>Related Posts</a>
+                                        <a onclick="storePostId();" class="btn btn-primary"></i>Related Posts</a>
                                     </p>
                                     </div>
                                     <div class="col-md-2">

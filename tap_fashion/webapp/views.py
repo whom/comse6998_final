@@ -4,6 +4,7 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 import post_functions
 import comment_functions
+import get_functions
 
 import json
 
@@ -38,6 +39,24 @@ class RelatedPostsView(generic.ListView):
 
     def get_queryset(self):
         return True
+
+    def get(self, request):
+        posts_list = []
+        post_id = request.GET.get('postId')
+
+        related_posts = post_functions.findRelatedPosts(post_id)
+
+        if related_posts:
+            for post in related_posts['related_posts']:
+                posts_list.append(get_functions.buildWholePost(post['post_id']))
+
+            print json.dumps(posts_list)
+
+            return render(request, 'webapp/related.html',
+                         {'esPosts': json.dumps(posts_list)})
+        else:
+            print "Nope."
+            return HttpResponse()
 
 '''
 Currently just stubs. We'd need to call the helper Python functions in
