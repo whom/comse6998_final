@@ -4,7 +4,7 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 import post_functions
 import comment_functions
-import get_functions
+from get_functions import *
 
 import json
 
@@ -18,15 +18,24 @@ class IndexView(generic.ListView):
         return True
 
 
-
 class DashboardView(generic.ListView):
     """
     Creates the view for the dashboard page of the app
     """
-    template_name = 'webapp/dashboard.html'
+    #template_name = 'webapp/dashboard.html'
 
-    def get_queryset(self):
-        return True
+    def get(self,request):
+        username = request.GET['username']
+        all_posts_list = getAllPosts()
+        posts_list = all_posts_list[:10]
+
+        for post in posts_list:
+            post['post_id'] = str(post['post_id'])
+            post['comments'].append("this is a new comment")
+            post['comments'].append("yay! this is just a comment")
+            post['comments'].append(post['post_id']);
+        return render(request, 'webapp/dashboard.html',
+                      {'esPosts': posts_list})
 
 class NewPostView(generic.ListView):
     template_name = 'webapp/post.html'
