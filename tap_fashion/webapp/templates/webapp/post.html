@@ -105,8 +105,7 @@
 				datatype: 'text',
 				data: {title: title, text: text, userid: user_id, username: user_name, image: image},
 				success: function(ret) {
-					data = JSON.parse(ret);
-					alert(data['return']);
+                    console.log(ret)
               	},
               	failure: function(ret) { 
               		alert("ERROR");
@@ -257,7 +256,7 @@
 						</p>
                         <form>
                         	<p>
-                                <textarea id="text" name="image" rows="1" cols="50">Image URL
+                                <textarea id="image" name="image" rows="1" cols="50">Image URL
                                 </textarea>
                             </p>
 						</form>

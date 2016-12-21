@@ -38,6 +38,7 @@ Currently just stubs. We'd need to call the helper Python functions in
 post_functions.py to store them into the queue.
 '''
 def storePost(request):
+    print "Generating a new post!"
     title = request.GET['title']
     text = request.GET['text']
     user_name = request.GET['username']
@@ -58,10 +59,7 @@ def storeComment(request):
     newComment = comment_functions.createComment(post_id, user_id, user_name, text)
     comment_functions.storeComment(newComment)
 
-    test = {}
-    test['return'] = 'success'
-
-    return HttpResponse(json.dumps(test))
+    return HttpResponse("success")
 
 @csrf_exempt
 def user_login(request):
