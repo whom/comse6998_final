@@ -89,7 +89,6 @@ def findRelatedPosts(post_id):
 		return None
 
 def storePost(post_message):
-	print "LOL"
     sqs_client =  sqs.connect_to_region(conf.get('sqs-region'),
       aws_access_key_id=conf.get('sqs-access-key'),
       aws_secret_access_key =conf.get('sqs-secret-key'))
@@ -100,7 +99,6 @@ def storePost(post_message):
     status = sqs_queue.write(message)
 
 def createPost(title, user_id, text, user_name, location=None, score=0, images=None, comments=None):
-	print "Creating a new post!"
 	post = {}
 	post['title'] = title
 	post['user_id'] = user_id
