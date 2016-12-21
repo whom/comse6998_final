@@ -46,8 +46,6 @@ def getAllPosts():
 		scroll_size = len(res['hits']['hits'])
 
 		for doc in res['hits']['hits']:
-			print doc
-			return
 			clean = doc['_source']
 			clean['post_id'] = doc['_id']
 			results.append(clean)
