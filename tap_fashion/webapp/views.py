@@ -26,13 +26,13 @@ class DashboardView(generic.ListView):
     #template_name = 'webapp/dashboard.html'
 
     def get(self,request):
-        test = request.GET.get('true', None)
+        test = request.GET.get('test', None)
 
         if not test:
             all_posts_list = getAllPosts()
         else:
             all_posts_list = getPost()
-            
+
         random.shuffle(all_posts_list)
         posts_list = all_posts_list[:10]
 
