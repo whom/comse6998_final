@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^dashboard/storeComment/', views.storeComment, name='newComment'),
     url(r'^related/', views.RelatedPostsView.as_view(), name='related_posts'),
     url(r'^user/login/$', views.user_login, name='user_login'),
+    url(r'^related/$', views.RelatedPostsView, name='related_posts'),
 ]

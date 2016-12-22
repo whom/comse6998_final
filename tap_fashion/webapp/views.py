@@ -25,7 +25,7 @@ class DashboardView(generic.ListView):
     #template_name = 'webapp/dashboard.html'
 
     def get(self,request):
-        username = request.GET['username']
+
         all_posts_list = getAllPosts()
         posts_list = all_posts_list[:10]
 
@@ -57,12 +57,12 @@ class RelatedPostsView(generic.ListView):
 
         if related_posts:
             for post in related_posts['related_posts']:
-                posts_list.append(get_functions.buildWholePost(post['post_id']))
+                posts_list.append(buildWholePost(post['post_id']))
 
             print json.dumps(posts_list)
 
             return render(request, 'webapp/related.html',
-                         {'esPosts': json.dumps(posts_list)})
+                         {'relatedPosts': posts_list})
         else:
             print "Nope."
             return HttpResponse()
