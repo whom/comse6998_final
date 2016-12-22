@@ -6,8 +6,8 @@ function readCookie(name) {
         }
     }
 }
-var testName
-var userid
+var testName;
+var userid;
 function initialize() {
     testName = readCookie("username");
     userid = readCookie("userid");

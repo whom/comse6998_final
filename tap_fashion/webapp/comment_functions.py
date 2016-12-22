@@ -22,6 +22,7 @@ conf = {
 ''' Stores the comment in ElasticSearch, then updates the post with this comment ID.
 '''
 def storeComment(comment_message):
+	print "Storing comment: " + json.dumps(comment_message)
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,
@@ -50,6 +51,7 @@ def storeComment(comment_message):
 ''' Creates and returns a dictionary object with comments.
 '''
 def createComment(post_id, user_id, user_name, text, location=None, score=0, images=None):
+	print "Creating comment for post " + post_id
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
 		verify_certs=True,

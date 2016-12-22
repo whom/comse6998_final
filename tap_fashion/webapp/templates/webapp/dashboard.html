@@ -50,6 +50,8 @@
 
         function addComment(post_id) {
             var commentContent = document.getElementById("cc"+post_id).value;
+            testName = readCookie("username");
+            userid = readCookie("userid");
 
 
             jQuery.ajax({
@@ -58,7 +60,7 @@
                 datatype: 'text',
                 data: {comment: commentContent, username: testName, userid: userid , post_id: post_id},
                 success: function(ret) {
-                    postNewComment(commentContent, testName,post_id);
+                    postNewComment(commentContent, testName, post_id);
 
                 },
                 failure: function(ret) {
