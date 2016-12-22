@@ -81,8 +81,12 @@
 
         function seeComments(comment_list){
             var pid=comment_list[comment_list.length-1];
-            for (comment in comment_list){
-                document.getElementById('c'+pid).innerHTML+= '<div class="comment-container">   <div class="Comment-User-ID">BKarla</div>  <div class="Comment-content">'+comment_list[comment]+'</div> </div>';
+            for (comment in comment_list) {
+                if (comment != comment_list.length - 1)
+                {
+                    document.getElementById('c' + pid).innerHTML += '<div class="comment-container">   <div class="Comment-User-ID">BKarla</div>  <div class="Comment-content">' + comment_list[comment] + '</div> </div>';
+
+                }
             }
             jQuery('#p'+pid).fadeIn("slow");
         }
