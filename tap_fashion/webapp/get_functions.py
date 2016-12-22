@@ -23,7 +23,7 @@ def buildWholePost(post_id):
 
 		for comment in comments:
 			print comment
-			comment_body = comment_functions.find_comment(comment)
+			comment_body = comment_functions.findComment(comment)
 			post['comments'].append(comment_body)
 
 		return post
@@ -58,13 +58,12 @@ def getPost():
 
 	es = Elasticsearch([ES_ENDPOINT], use_ssl=True, verify_certs=True,
 		ca_certs=certifi.where(),)
-	res = es.get(index="posts", doc_type='post', id='AVjLjsU2CBwe55JHWol-')
+	res = es.get(index="posts", doc_type='post', id='AVjMtr7gCBwe55JHWopg')
 
 	clean = res['_source']
 	clean['post_id'] = res['_id']
 	results.append(clean)
 
-	print results
 	return results
 
 '''
