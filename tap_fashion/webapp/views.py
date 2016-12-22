@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import post_functions
 import comment_functions
 from get_functions import *
+import random
 
 import json
 
@@ -27,6 +28,7 @@ class DashboardView(generic.ListView):
     def get(self,request):
 
         all_posts_list = getAllPosts()
+        random.shuffle(all_posts_list)
         posts_list = all_posts_list[:10]
 
         for post in posts_list:
@@ -58,8 +60,6 @@ class RelatedPostsView(generic.ListView):
         if related_posts:
             for post in related_posts['related_posts']:
                 posts_list.append(buildWholePost(post['post_id']))
-
-            print json.dumps(posts_list)
 
             return render(request, 'webapp/related.html',
                          {'relatedPosts': posts_list})
