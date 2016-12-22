@@ -48,14 +48,9 @@
             window.location.href = "/webapp/related/?postId=" + postId;
         }
 
-        function addComment() {
-            var commentContent = document.getElementById("comment-textbox").value;
-            var post_id = document.getElementById("post1").getAttribute("postid");
-            alert(post_id)
+        function addComment(post_id) {
+            var commentContent = document.getElementById("cc"+post_id).value;
 
-
-            alert(commentContent);
-            alert(testName);
 
             jQuery.ajax({
                 url: 'storeComment',
@@ -63,23 +58,39 @@
                 datatype: 'text',
                 data: {comment: commentContent, username: testName, userid: userid , post_id: post_id},
                 success: function(ret) {
-                    alert(ret);
+                    postNewComment(commentContent, testName,post_id);
+
                 },
-                failure: function(ret) { 
+                failure: function(ret) {
                     alert("ERROR");
                 }
             });
 
-            postComment(commentContent, testName);
+        }
+
+        function postNewComment(commentContent, testName,post_id){
+            document.getElementById("c"+post_id).innerHTML+='<div class="comment-container"><div class="Comment-User-ID" >'+testName+'</div><div class="Comment-content" >'+commentContent+'</div></div>';
+            document.getElementById("cc"+post_id).value=""
+            document.getElementById("cc"+post_id).placeholder = "Type a comment..";
+            // document.getElementById("comments1").innerHTML+='    <div class="input-group"> <input type="text" class="form-control" placeholder="Type a comment..." id="comment-textbox" aria-describedby="input-comment"> <span class="input-group-addon" id="input-comment"><button onclick="postComment();" class="post-comment-button">POST</button></span> </div>';
         }
 
         function goToCreatePost(){
             window.location.href = "/webapp/post";
         }
 
-         function seeComments(comment_list){
-        console.log(comment_list[1]);
-    }
+        function seeComments(comment_list){
+            var pid=comment_list[comment_list.length-1];
+            for (comment in comment_list){
+                document.getElementById('c'+pid).innerHTML+= '<div class="comment-container">   <div class="Comment-User-ID">BKarla</div>  <div class="Comment-content">'+comment_list[comment]+'</div> </div>';
+            }
+            jQuery('#p'+pid).fadeIn("slow");
+        }
+
+
+
+
+
     function loadRelatedPosts(commentList) {
 
             var pid = commentList[commentList.length-1]
@@ -304,8 +315,8 @@ _________________________________________________________ -->
                                 <div class="col-md-2">
                                 </div>
                             </div>
-                            <div class="comments" id="c">
-                                <div id="comment-outer-container">
+                            <div class="comments" id="p{{post.post_id}}">
+                                <div class="comment-outer-container" id="c{{post.post_id}}">
                                     <div class="comment-container">
 
                                         <div class="Comment-User-ID">BKarla</div>
@@ -324,9 +335,9 @@ _________________________________________________________ -->
 
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Type a comment..."
-                                               id="comment-textbox" aria-describedby="input-comment">
+                                               id="cc{{post.post_id}}" aria-describedby="input-comment">
                                         <span class="input-group-addon" id="input-comment"><button
-                                                onclick="addComment()" class="post-comment-button">POST</button></span>
+                                                onclick="addComment('{{post.post_id}}')" class="post-comment-button">POST</button></span>
                                     </div>
 
                                 </div>
@@ -521,7 +532,7 @@ _________________________________________________________ -->
     <!-- /#all -->
 
 
-    
+
 
     <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
