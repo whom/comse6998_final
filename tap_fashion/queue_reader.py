@@ -11,6 +11,7 @@ conf = {
 }
 
 def main(queue_name, index, doc_type):
+    print "Starting up " + index + " " + doc_type
     awsSQS = sqs.connect_to_region(conf.get('sqs-region'),
 		aws_access_key_id=conf.get('sqs-access-key'),
 		aws_secret_access_key =conf.get('sqs-secret-key'))

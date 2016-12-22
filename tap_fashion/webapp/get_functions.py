@@ -37,6 +37,7 @@ def getAllPosts():
 		ca_certs=certifi.where(),)
 	res = es.search(index="posts", doc_type="post", search_type='scan',
 		scroll='2m', size=10, body={"query": {"match_all": {}}})
+
 	sid = res['_scroll_id']
 	scroll_size = res['hits']['total']
 
@@ -52,6 +53,19 @@ def getAllPosts():
 
 	return results
 
+def getPost():
+	results = []
+
+	es = Elasticsearch([ES_ENDPOINT], use_ssl=True, verify_certs=True,
+		ca_certs=certifi.where(),)
+	res = es.get(index="posts", doc_type='post', id='AVjLjsU2CBwe55JHWol-')
+
+	clean = res['_source']
+	clean['post_id'] = res['_id']
+	results.append(clean)
+
+	print results
+	return results
 
 '''
 Note: We're grabbing comments one at a time. However, we can dump all the IDs
