@@ -34,13 +34,16 @@ class DashboardView(generic.ListView):
             all_posts_list = getPost()
 
         random.shuffle(all_posts_list)
-        posts_list = all_posts_list[:10]
-
+        for posts in all_posts_list:
+            if posts['comments'][0] == 'AVklK6B-EcGqiiaWuFoJ':
+                my_post = posts
+                print posts
+            posts_list = all_posts_list[:10]
+        my_dict = [{'user_name':'Anurag','text':'Wow! where did you get this from?'},{'user_name':'Bindia','text':'This is a steal! buy it!'}]
         for post in posts_list:
-            post['post_id'] = str(post['post_id'])
-            post['comments'].append("this is a new comment")
-            post['comments'].append("yay! this is just a comment")
-            post['comments'].append(post['post_id']);
+            print post['comments']
+            post['comments'].append(my_dict)
+            print post['comments']
         return render(request, 'webapp/dashboard.html',
                       {'esPosts': posts_list})
 
@@ -99,6 +102,7 @@ def storeComment(request):
     comment_functions.storeComment(newComment)
 
     return HttpResponse("success")
+
 
 @csrf_exempt
 def user_login(request):
