@@ -106,10 +106,7 @@
 
 
 
-    function loadRelatedPosts(commentList) {
-
-            var pid = commentList[commentList.length-1]
-            console.log(pid)
+    function loadRelatedPosts(pid) {
             window.location.href = "/webapp/related?postId=" + pid;
     }
 
@@ -328,7 +325,7 @@ _________________________________________________________ -->
 
                                         <a onclick="seeComments( '{{ post.post_id }}' )" class="btn btn-default">View comments</a>
                                         <a href="basket.html" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i>Like</a>
-                                        <a onclick="loadRelatedPosts({{ post.comments|safe }})" class="btn btn-primary"></i>Related Posts</a>
+                                        <a onclick="loadRelatedPosts('{{ post.post_id|safe }}')" class="btn btn-primary"></i>Related Posts</a>
                                     </p>
                                 </div>
                                 <div class="col-md-2">
