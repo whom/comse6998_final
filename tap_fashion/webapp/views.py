@@ -53,7 +53,7 @@ class ProfileView(generic.ListView):
 
     def get(self,request):
         test = request.GET.get('test', None)
-        topic_list = ['jacket','skirt','top','gucci','armani','macy','ralph lauren','vero moda','glasses']
+        topic_list = ['jacket','skirt','top','gucci','armani','macy','ralph lauren','vero moda','glasses','hat','glove','lipstick','ring']
 
         return render(request, 'webapp/profile.html',
                       {'topics': topic_list})

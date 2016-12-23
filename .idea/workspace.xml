@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96c08168-7615-4cb2-9fb9-b727d6a4d711" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/comse6998_final.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html" afterPath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/views.py" afterPath="$PROJECT_DIR$/tap_fashion/webapp/views.py" />
     </list>
     <ignored path="comse6998_final.iws" />
@@ -51,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+            <state relative-caret-position="1232">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -155,11 +152,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Profile.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Profile.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="32" column="77" selection-start-line="32" selection-start-column="77" selection-end-line="32" selection-end-column="77" />
+            <state relative-caret-position="302">
+              <caret line="43" column="62" selection-start-line="43" selection-start-column="62" selection-end-line="43" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -209,9 +206,9 @@
         <option value="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/js/profile.js" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/postSearch.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/urls.py" />
-        <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/views.py" />
+        <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html" />
       </list>
     </option>
   </component>
@@ -1134,14 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="32" column="77" selection-start-line="32" selection-start-column="77" selection-end-line="32" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
@@ -1188,11 +1177,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+        <state relative-caret-position="1232">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="43" column="62" selection-start-line="43" selection-start-column="62" selection-end-line="43" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
