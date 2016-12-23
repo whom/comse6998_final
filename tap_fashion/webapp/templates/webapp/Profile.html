@@ -3,10 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LittUp</title>
+    <title>Tap Fashion</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="icon" type="image/ico" href="{% static 'LittUp/littup.ico' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -17,71 +16,46 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{% static 'LittUp/script.js' %}"></script>
-    <script type="text/javascript" src="{% static 'LittUp/profile.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'webapp/js/profile.js' %}"></script>
     <script>
-        {% for t in favtopics %}
-            favTopics.push("{{ t }}");
-        {% endfor %}
+        {%for t in topics %}
+        favTopics.push("{{ t }}");
+        {%endfor %}
+
+
+
     </script>
-    <link rel="stylesheet" type="text/css" href="{% static 'LittUp/style.css' %}"/>
+    <script>
+
+        function changeTopic(topic) {
+            console.log(topic);
+            window.location.href = "/webapp/profilesearch?topictext=" + topic;;
+            topictext
+        }
+    </script>>
+    <link rel="stylesheet" type="text/css" href="{% static 'webapp/css/style.css' %}"/>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 </head>
-<body style="display:none">
-<div id="header">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <button type="button" class="navbar-toggle"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse">
-                <span class="sr-only"> Toggle navigation</span>
-                <span class="icon-bar"> </span>
-                <span class="icon-bar"> </span>
-                <span class="icon-bar"> </span>
-            </button>
-            <a class="navbar-brand" style="padding-top: 5px" href="/LittUp/dashboard"><span><img
-                    src="{% static 'LittUp/logo_small.png' %}">&nbsp;&nbsp;</span>LittUp</a>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right ">
-                    <li><a class="navbar-brand" href="/LittUp/playquiz"> Play Quiz</a></li>
-                    <li><a class="navbar-brand" href="/LittUp/leaderboard"> Leaderboard</a></li>
-                    <li><a class="navbar-brand" onclick="loadManageProfile()"> Manage Profile</a></li>
-                    <label class="navbar-brand" id="Name">Hello</label>
-                    <li><a onclick="facebooklogout();" class="navbar-brand"> Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>
+<body>
 
 <div id="contentwithpadding">
     <h2 class="leaderboardtitle" align="center">Favorite topics</h2>
     <form method="POST" action="" style="margin-left: 20px">
-        {% for topic in topics %}
-            {% if topic.id in favtopics %}
-                <label class="favtopic-checked">
-                    <span class="glyphicon glyphicon-star">&nbsp;</span>
-                    <input class="favtopic" type="checkbox" onchange="changeFavTopic(this)" checked="checked"
-                           value="{{ topic.id }}">
-                    <span class="topic">{{ topic.name }}</span>
-                </label>
-            {% else %}
-                <label class="favtopic-unchecked">
-                    <span class="glyphicon glyphicon-star-empty">&nbsp;</span>
-                    <input class="favtopic" type="checkbox" onchange="changeFavTopic(this)" value="{{ topic.id }}">
-                    <span class="topic">{{ topic.name }}</span>
-                </label>
-            {% endif %}
+        {% for t in topics %}
+        <label class="favtopic-unchecked">
+            <span class="glyphicon glyphicon-star-empty">&nbsp;</span>
+            <input class="favtopic" type="checkbox" onchange="changeTopic('{{t}}')" checked="checked" value={{t}}>
+            <span class="topic">{{t}}</span>
+        </label>
         {% endfor %}
+
         <br>
-        <div align="center">
-            <input class="btn btn-primary" onclick="updateFavTopic()" type="button" value="Update">
-        </div>
+
     </form>
 </div>
 
-<div id="snackbar">Favorite Topics Updated</div>
 
 </body>
 </html>

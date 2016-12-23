@@ -20,12 +20,7 @@ body {
     padding: 0;
 }
 
-body.login {
-    width: 100%;
-    height: 100%;
-    font-family: 'Open Sans', sans-serif;
-    background: url("..\TFBackground.jpg");
-}
+
 
 a {
     cursor: pointer;
@@ -55,6 +50,44 @@ a {
     top: 0;
 }
 
+#contentwithpadding {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 75px;
+
+    overflow: auto;
+    height: 100%;
+}
+
+#content {
+    position: absolute;
+
+    overflow: auto;
+    top: 50px;
+    bottom: 0px;
+    left: 0;
+}
+
+#content-right {
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    overflow: auto;
+
+    left: 60%;
+    width: 40%;
+}
+
+#content-left {
+    position: absolute;
+    top: 50px;
+    bottom: 0px;
+    overflow: auto;
+
+    right: 40%;
+    width: 60%;
+    left: 0;
+}
 
 #footer {
     bottom: 0;

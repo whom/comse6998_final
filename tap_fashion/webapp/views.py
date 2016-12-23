@@ -44,6 +44,20 @@ class DashboardView(generic.ListView):
         return render(request, 'webapp/dashboard.html',
                       {'esPosts': posts_list})
 
+
+class ProfileView(generic.ListView):
+    """
+    Creates the view for the dashboard page of the app
+    """
+    #template_name = 'webapp/dashboard.html'
+
+    def get(self,request):
+        test = request.GET.get('test', None)
+        topic_list = ['jacket','skirt','top','gucci','armani','macy','ralph lauren','vero moda','glasses']
+
+        return render(request, 'webapp/profile.html',
+                      {'topics': topic_list})
+
 class NewPostView(generic.ListView):
     template_name = 'webapp/post.html'
 
@@ -71,6 +85,29 @@ class RelatedPostsView(generic.ListView):
         else:
             print "Nope."
             return HttpResponse()
+
+
+class ProfilesearchView(generic.ListView):
+    """
+    Creates the view for the dashboard page of the app
+    """
+    #template_name = 'webapp/dashboard.html'
+
+    def get(self,request):
+
+        topic_name = request.GET.get('topictext')
+        print topic_name
+        posts_list = []
+        #posts_list = get_searched_posts(topic_name)
+
+        for post in posts_list:
+            post['post_id'] = str(post['post_id'])
+            post['comments'].append("this is a new comment")
+            post['comments'].append("yay! this is just a comment")
+            post['comments'].append(post['post_id']);
+
+        return render(request, 'webapp/postSearch.html',
+                      {'relatedPosts': posts_list})
 
 '''
 Currently just stubs. We'd need to call the helper Python functions in

@@ -12,4 +12,7 @@ urlpatterns = [
     url(r'^related/', views.RelatedPostsView.as_view(), name='related_posts'),
     url(r'^user/login/$', views.user_login, name='user_login'),
     url(r'^related/$', views.RelatedPostsView, name='related_posts'),
+    url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
+    url(r'^profilesearch/$', views.ProfilesearchView.as_view(), name='profilesearch'),
+
 ]

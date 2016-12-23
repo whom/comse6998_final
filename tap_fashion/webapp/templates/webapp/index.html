@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'webapp/css/indexStyle.css' %}"/>
     <title>Tap Fashion</title>
     <script type="text/javascript" src="{% static 'webapp/js/LoginScript.js' %}"></script>
-    <script type="text/javascript" src="{% static 'webapp/css/indexPage.css' %}"></script>
+
 </head>
 <!--
   Below we include the Login Button social plugin. This button uses
@@ -16,8 +16,7 @@
   the FB.login() function when clicked.
 -->
 
-<body class="login" style="display: none; background-image: url(/webapp/TFBackground.jpg);
-    background-repeat: no-repeat;">
+<body class="login" background="{% static 'webapp/TFBackground.jpg' %}" style="background-size: 100%; background-repeat:no-repeat ">
 <script>
     // This is called with the results from from FB.getLoginStatus().
     function statusChangeCallback(response) {
@@ -109,8 +108,8 @@
   the FB.login() function when clicked.
 -->
 <div style="float: right; margin-right: 10%">
-    <h1 class="mainText" style="color: #ff6347; font-family:cursive; font-size: 50px;
-    line-height: 100px; text-shadow: 0 1px 1px #ff6347;">Tap Fashion</h1>
+    <h1 class="mainText" style="color: #ff6347; font-family:cursive; font-size: 70px;
+    line-height: 100px; text-shadow: 0 1px 1px #ff6347; margin-right: 40px;">Tap Fashion</h1>
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 </div>
 
