@@ -113,6 +113,11 @@
               	}
           	});
     	}
+
+    	function goToHome() {
+            var username = readCookie(username);
+            window.location.href = "/webapp/dashboard?username=" + username;
+        }
     </script>
 
 
@@ -193,11 +198,11 @@
             <div class="navbar-collapse collapse" id="navigation">
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a href="index.html">Home</a>
+                    <li class="active"><a href="#" onClick="goToHome();">Home</a>
                     </li>
-                     <li ><a href="index.html">Profile</a>
+                     <li ><a href="/webapp/dashboard">Profile</a>
                     </li>
-                     <li ><a href="post.html">Create New Post</a>
+                     <li ><a href="/webapp/post">Create New Post</a>
                     </li>
                 </ul>
 

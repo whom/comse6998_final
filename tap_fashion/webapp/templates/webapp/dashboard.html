@@ -93,6 +93,12 @@
 
             */
             /*
+=======
+        function goToHome() {
+            window.location.href = "/webapp/dashboard?username=" + response.name;
+        }
+        function seeComments(comment_list){
+>>>>>>> dc2df85ae4c0e213e0fe53ddd26041c2da5db484
             var pid=comment_list[comment_list.length-1];
             for (comment in comment_list) {
                 if (comment != comment_list.length - 1)
@@ -114,6 +120,7 @@
             console.log(pid)
             window.location.href = "/webapp/related?postId=" + pid;
     }
+
 
 
     </script>
@@ -198,7 +205,7 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="index.html">Home</a>
+                <li class="active"><a href="#" onClick="goToHome();">Home</a>
                 </li>
                 <li><a href="index.html">Profile</a>
                 </li>
@@ -379,12 +386,7 @@ _________________________________________________________ -->
 
                 {% endfor %}
 
-                <div class="pages">
 
-                    <p class="loadMore">
-                        <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a>
-                    </p>
-                </div>
 
 
             </div>
