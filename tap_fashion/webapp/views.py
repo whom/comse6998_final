@@ -34,11 +34,8 @@ class DashboardView(generic.ListView):
             all_posts_list = getPost()
 
         random.shuffle(all_posts_list)
-        for posts in all_posts_list:
-            if posts['comments'][0] == 'AVklK6B-EcGqiiaWuFoJ':
-                my_post = posts
-                print posts
-            posts_list = all_posts_list[:10]
+
+        posts_list = all_posts_list[:10]
         my_dict = [{'user_name':'Anurag','text':'Wow! where did you get this from?'},{'user_name':'Bindia','text':'This is a steal! buy it!'}]
         for post in posts_list:
             print post['comments']
