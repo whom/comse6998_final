@@ -98,7 +98,7 @@ class ProfilesearchView(generic.ListView):
         topic_name = request.GET.get('topictext')
         print topic_name
         posts_list = []
-        #posts_list = get_searched_posts(topic_name)
+        posts_list = get_searched_posts(topic_name)
 
         for post in posts_list:
             post['post_id'] = str(post['post_id'])

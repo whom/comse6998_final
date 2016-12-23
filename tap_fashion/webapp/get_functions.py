@@ -66,6 +66,30 @@ def getPost():
 
 	return results
 
+
+def get_searched_posts(search_str):
+   results = []
+
+   es = Elasticsearch([ES_ENDPOINT], use_ssl=True, verify_certs=True,
+       ca_certs=certifi.where(),)
+   res = es.search(index="posts", doc_type="post", search_type='scan',
+       scroll='2m', size=10, body={"query": {"match": {"title": "%"+search_str+"%"}}})
+
+   sid = res['_scroll_id']
+   scroll_size = res['hits']['total']
+
+   while scroll_size > 0:
+       res = es.scroll(scroll_id=sid, scroll='2m')
+       sid = res['_scroll_id']
+       scroll_size = len(res['hits']['hits'])
+
+       for doc in res['hits']['hits']:
+           clean = doc['_source']
+           clean['post_id'] = doc['_id']
+           results.append(clean)
+
+   return results
+   
 '''
 Note: We're grabbing comments one at a time. However, we can dump all the IDs
 into ElasticSearch as a list which will be quicker. But we can visit this
