@@ -48,7 +48,6 @@
             testName = readCookie("username");
             userid = readCookie("userid");
 
-
             jQuery.ajax({
                 url: 'storeComment',
                 type: 'GET',
@@ -75,23 +74,31 @@
         function goToCreatePost(){
             window.location.href = "/webapp/post";
         }
+
         function goToProfile() {
             var username = readCookie("username");
             window.location.href = "/webapp/profile?username=" + username;
         }
-        function goToHome() {
-            var username = readCookie("username");
-            window.location.href = "/webapp/dashboard?username=" + username;
-        }
-        function seeComments(comment_list){
-            var pid=comment_list[comment_list.length-1];
-            for (comment in comment_list) {
-                if (comment != comment_list.length - 1)
-                {
-                    document.getElementById('c' + pid).innerHTML += '<div class="comment-container">   <div class="Comment-User-ID">BKarla</div>  <div class="Comment-content">' + comment_list[comment] + '</div> </div>';
 
+
+        function seeComments(pid){
+         /*   jQuery.ajax({
+                url: 'viewComment',
+                type: 'GET',
+                datatype: 'text',
+                data: {comment_list: comment_list},
+                success: function(ret) {
+                    //postNewComment(commentContent, testName, post_id);
+                    alert("success");
+                    console.log(comment_list);
+                },
+                failure: function(ret) {
+                    alert("ERROR");
                 }
-            }
+            });
+
+            */
+
             jQuery('#p'+pid).fadeIn("slow");
         }
 
@@ -316,7 +323,7 @@ _________________________________________________________ -->
                                 <div class="col-md-8 lower-buttons">
                                     <p class="buttons">
 
-                                        <a onclick="seeComments( {{ post.comments|safe }} )" class="btn btn-default">View comments</a>
+                                        <a onclick="seeComments( '{{ post.post_id }}' )" class="btn btn-default">View comments</a>
                                         <a href="basket.html" class="btn btn-primary"><i class="fa fa-thumbs-o-up"></i>Like</a>
                                         <a onclick="loadRelatedPosts({{ post.comments|safe }})" class="btn btn-primary"></i>Related Posts</a>
                                     </p>
@@ -339,6 +346,13 @@ _________________________________________________________ -->
                                         <div class="Comment-User-ID">BKalra</div>
                                         <div class="Comment-content">OK sir</div>
                                     </div>
+                                    {% for comment in post.comments %}
+                                        <div class="comment-container">
+                                        <div class="Comment-User-ID">{{comment.user_name}}</div>
+                                        <div class="Comment-content">{{comment.text}}</div>
+                                    </div>
+                                    {% endfor %}
+
                                 </div>
                                 <div class="comment-container">
 
