@@ -32,14 +32,14 @@ def main(queue_name, index, doc_type):
 		    	if queue_name == 'posts-queue':
 		    		result = es.index(index='posts', doc_type='post',
 		    			body=msg)
+		    		print "Stored new post as {0}".format(result['_id'])
 		    	else:
 		    		post = msg['post']
 		    		comment = msg['comment']
 
 	    			result = es.index(index='comments',doc_type='comment', body=comment)
 	    			post['_source']['comments'].append(result['_id'])
-	    			print result['_id']
-	    			print post['_id']
+	    			print "Stored new comment for post {0} as {1}".format(result['_id'], post['_id'])
 
 	    			es.update(index="posts", doc_type="post", id=post['_id'], body={"doc": {"comments": post['_source']['comments']}})
 
