@@ -4,7 +4,7 @@ from boto.sqs.message import Message
 # from kafka import KafkaProducer
 from  elasticsearch import Elasticsearch
 from datetime import datetime
-from gensim import corpora, models, similarities
+# from gensim import corpora, models, similarities
 
 ES_ENDPOINT = ('https://search-tap-fashion-ahlt6conoduuuihoeyjqd7olpq.us-west-2.es.amazonaws.com')
 CORPUS_PATH = "/tmp/corpus.mm"
@@ -16,7 +16,7 @@ conf = {
   'sqs-queue-name': 'posts-queue',
   'sqs-region': 'us-west-2'
 }
-
+'''
 def is_number(s):
   try:
     float(s)
@@ -32,7 +32,7 @@ def sanitize_sentence(x):
   s = [w for w in s if 'http' not in w and not is_number(w)]
   return s
 
-'''
+
 In instances where a related post isn't found, then calculate it.
 Then store it.
 Returns a list of dictionaries where there are two keys:
@@ -41,7 +41,7 @@ score: the score our system gave it.
 
 DOESN'T WORK. The module returns the document index, not the ID...
 Will need a complete rework in order to calculate in realtime...
-'''
+
 def calculateRelatedPosts(post_id):
 	es = Elasticsearch([ES_ENDPOINT],
 		use_ssl=True,
@@ -69,6 +69,7 @@ def calculateRelatedPosts(post_id):
 	storage['related_posts'] = dic
 #	es.index(index='related_posts', doc_type='post', id=post_id, body=storage)
 	return dic
+'''
 
 '''
 For a given post, find the set of 10 related posts. If none exist, then calculate it.
