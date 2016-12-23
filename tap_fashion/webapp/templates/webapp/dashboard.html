@@ -113,7 +113,10 @@
             window.location.href = "/webapp/related?postId=" + pid;
     }
 
-
+    function goToHome() {
+            var username = readCookie("username");
+            window.location.href = "/webapp/dashboard?username=" + username;
+        }
 
     </script>
 
