@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96c08168-7615-4cb2-9fb9-b727d6a4d711" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tap_fashion/.ebextensions/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tap_fashion/.ebextensions/django.config" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tap_fashion/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tap_fashion/requirements.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/post_functions.py" afterPath="$PROJECT_DIR$/tap_fashion/post_functions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/queue_reader.py" afterPath="$PROJECT_DIR$/tap_fashion/queue_reader.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css" afterPath="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexStyle.css" afterPath="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html" afterPath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/index.html" afterPath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/post.html" afterPath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/post.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/related.html" afterPath="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/related.html" />
     </list>
     <ignored path="comse6998_final.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,8 +34,8 @@
       <file leaf-file-name="indexStyle.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" column="33" selection-start-line="15" selection-start-column="4" selection-end-line="16" selection-end-column="33" />
+            <state relative-caret-position="506">
+              <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -42,7 +44,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="-1106">
               <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -52,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexPage.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="indexPage.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+            <state relative-caret-position="594">
+              <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -79,7 +81,7 @@
       <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
+            <state relative-caret-position="-2796">
               <caret line="362" column="0" selection-start-line="362" selection-start-column="0" selection-end-line="362" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#script#0;n#head#0;n#html#0;n#!!top" expanded="true" />
@@ -109,8 +111,8 @@
       <file leaf-file-name="post.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/post.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="687">
-              <caret line="200" column="77" selection-start-line="200" selection-start-column="77" selection-end-line="200" selection-end-column="77" />
+            <state relative-caret-position="352">
+              <caret line="64" column="66" selection-start-line="64" selection-start-column="66" selection-end-line="64" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -128,7 +130,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
@@ -168,12 +170,12 @@
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/related.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/views.py" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/fonts/indexPage.css" />
-        <option value="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/post.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexStyle.css" />
         <option value="$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/index.html" />
+        <option value="$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css" />
       </list>
     </option>
   </component>
@@ -986,16 +988,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/Profile.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -1004,17 +996,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/post.html">
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/favicon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/TFBackground.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexStyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="687">
-          <caret line="200" column="77" selection-start-line="200" selection-start-column="77" selection-end-line="200" selection-end-column="77" />
+        <state relative-caret-position="506">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1106">
+          <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
+        <state relative-caret-position="-2796">
           <caret line="362" column="0" selection-start-line="362" selection-start-column="0" selection-end-line="362" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#script#0;n#head#0;n#html#0;n#!!top" expanded="true" />
@@ -1040,40 +1061,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/favicon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/TFBackground.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexStyle.css">
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/templates/webapp/post.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
-          <caret line="16" column="33" selection-start-line="15" selection-start-column="4" selection-end-line="16" selection-end-column="33" />
+          <caret line="64" column="66" selection-start-line="64" selection-start-column="66" selection-end-line="64" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/static/webapp/css/indexPage.css">
+    <entry file="file://$PROJECT_DIR$/tap_fashion/webapp/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="330">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
