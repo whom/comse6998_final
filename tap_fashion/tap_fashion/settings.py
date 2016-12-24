@@ -25,7 +25,7 @@ SECRET_KEY = '0c1$k55lxb8m1b&=j4*k5uj2_a#5ac3)1ke9l##a_03l9ta-r9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-env.ujh4ejwhtb.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['django-env.ujh4ejwhtb.us-west-2.elasticbeanstalk.com', 'localhost']
 
 
 # Application definition
@@ -117,15 +117,4 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+STATIC_URL = 'https://s3-us-west-2.amazonaws.com/tap-fashion-static/'
