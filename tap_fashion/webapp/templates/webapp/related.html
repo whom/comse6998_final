@@ -57,6 +57,9 @@
                     '<a>Hello, <span id="userName">' + testName + '</span>!'+'</a>';
 
         }
+        function goToCreatePost(){
+            window.location.href = "/webapp/post";
+        }
     </script>
 
 <body onload="initialize()">>
@@ -116,7 +119,7 @@ _________________________________________________________ -->
     <div class="container">
         <div class="navbar-header">
 
-            <a style="font-size: 20px;" class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+            <a style="font-size: 20px;" class="navbar-brand home" href="/webapp/dashboard" data-animate-hover="bounce">
                 <strong>TAP-FASHION</strong>
             </a>
             <div class="navbar-buttons">
@@ -135,11 +138,11 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="index.html">Home</a>
+                <li class="active"><a href="/webapp/dashboard/">Home</a>
                 </li>
-                <li><a href="index.html">Profile</a>
+                <li><a href="/webapp/profile/">Profile</a>
                 </li>
-                <li><a href="#" onclick="goToCreatePost();">Create New Post</a>
+                <li><a href="/webapp/post" onclick="goToCreatePost();">Create New Post</a>
                 </li>
             </ul>
 

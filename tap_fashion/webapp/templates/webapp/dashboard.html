@@ -72,12 +72,12 @@
         }
 
         function goToCreatePost(){
-            window.location.href = "/post";
+            window.location.href = "/webapp/post";
         }
 
         function goToProfile() {
             var username = readCookie("username");
-            window.location.href = "/profile?username=" + username;
+            window.location.href = "/webapp/profile?username=" + username;
         }
 
 
@@ -107,12 +107,12 @@
 
 
     function loadRelatedPosts(pid) {
-            window.location.href = "/dashboard/related?postId=" + pid;
+            window.location.href = "/webapp/related?postId=" + pid;
     }
 
     function goToHome() {
             var username = readCookie("username");
-            window.location.href = "/dashboard?username=" + username;
+            window.location.href = "/webapp/dashboard?username=" + username;
         }
 
     </script>
@@ -178,7 +178,7 @@ _________________________________________________________ -->
     <div class="container">
         <div class="navbar-header">
 
-            <a style="font-size: 20px;" class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+            <a style="font-size: 20px;" class="navbar-brand home" href="/webapp/" data-animate-hover="bounce">
                 <strong>TAP-FASHION</strong>
             </a>
             <div class="navbar-buttons">
